@@ -1,6 +1,6 @@
 import React from "react";
 
-function Saved()
+const Saved = () =>
 {
     return (
         <div>

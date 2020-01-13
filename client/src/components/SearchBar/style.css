@@ -1,0 +1,14 @@
+.search-container
+{
+    width: 100%;
+    min-height: 100px;
+    background-color: #2881e738;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+p
+{
+    color: #ffffff;
+    margin-bottom: 2px;
+}
