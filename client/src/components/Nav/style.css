@@ -1,0 +1,41 @@
+.google-logo
+{
+    background-image: url("./img/google.png");
+    background-size: 100px 33px;
+    background-repeat: no-repeat;
+    width: 108px;
+    height: 33px;
+}
+
+.navbar
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+  
+.navbar__link
+{
+    margin: 1em;
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    letter-spacing: .3em;
+    text-indent: .3em;
+    color: #181818;
+    border-bottom: 3px solid transparent;
+}
+  
+.navbar__link:hover
+{
+    transform: translateY(-2px);
+}
+  
+.navbar__link--active
+{
+    border-bottom: 3px solid #29b6f6;
+    transition: border-bottom .5s ease-in-out;
+}
+  

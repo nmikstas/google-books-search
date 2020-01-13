@@ -1,0 +1,28 @@
+html,
+body
+{
+    height: 100%;
+    font-family: sans-serif;
+    background-size: 100px 100px;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+}
+
+#page-body
+{
+    flex: 1 0 auto;
+    padding: 10px;
+    background-image: url("./img/noisy_net.png");
+}
+
+#root
+{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
