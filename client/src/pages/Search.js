@@ -21,11 +21,16 @@ class Search extends React.Component
         //Get the book data.
         bookData =
         {
-                authors: this.state.searchResults[index].volumeInfo.authors,
-                description: this.state.searchResults[index].volumeInfo.description,
-                image: this.state.searchResults[index].volumeInfo.imageLinks.smallThumbnail,
-                link: this.state.searchResults[index].volumeInfo.infoLink,
-                title: this.state.searchResults[index].volumeInfo.title
+                authors: this.state.searchResults[index].volumeInfo.authors ? 
+                    this.state.searchResults[index].volumeInfo.authors : "N/A",
+                description: this.state.searchResults[index].volumeInfo.description ?
+                    this.state.searchResults[index].volumeInfo.description : "N/A",
+                image: this.state.searchResults[index].volumeInfo.imageLinks ?
+                    this.state.searchResults[index].volumeInfo.imageLinks.smallThumbnail : "N/A",
+                link: this.state.searchResults[index].volumeInfo.infoLink ?
+                    this.state.searchResults[index].volumeInfo.infoLink : "N/A",
+                title: this.state.searchResults[index].volumeInfo.title ?
+                    this.state.searchResults[index].volumeInfo.title : "N/A"
         }
         
         API.getBook(bookData.title)
