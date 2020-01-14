@@ -1,0 +1,40 @@
+.item-body
+{
+    background-color: #ffffff5e;
+    border-radius: 5px;
+}
+
+.title
+{
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.authors
+{
+    color: #444444;
+    font-size: 1.2rem;
+}
+
+.author-names
+{
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.summary
+{
+    color: #444444;
+    font-size: 1.2rem;
+}
+
+.image
+{
+    max-width: 100%;
+}
+
+.description
+{
+    font-size: 1rem;
+}

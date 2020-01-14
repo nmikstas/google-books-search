@@ -4,7 +4,7 @@ import "./style.css";
 const SearchItems = ({children}) =>
 {
     return (
-        <div>
+        <div className="search-body mt-2 py-2 pl-3">
            {children}
         </div>
     );

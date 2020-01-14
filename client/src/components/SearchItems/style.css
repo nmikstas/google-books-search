@@ -1,0 +1,18 @@
+.search-body
+{
+    background-color: #2881e738;
+    border-radius: 5px;
+}
+
+.search-body > h4
+{
+    color: #ffffff;
+    font-weight: normal;
+}
+
+.search-body > h3
+{
+    color: #636363;
+    font-weight: bold;
+    font-size: 2rem;
+}

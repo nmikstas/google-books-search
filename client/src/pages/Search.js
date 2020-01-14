@@ -1,14 +1,62 @@
 import React from "react";
 import SearchBar from "../components/SearchBar";
 import SearchItems from "../components/SearchItems";
+import SearchItem from "../components/SearchItem";
 import API from "../utils/API";
 
 class Search extends React.Component
 {
     state =
     {
-        searchText: ""
+        searchText: "",
+        searchResults: [],
+        saveStatus: []
     };
+
+    clickSave = (index) =>
+    {
+        let saveStatus = [...this.state.saveStatus];
+        let bookData = {};
+
+        //Get the book data.
+        bookData =
+        {
+                authors: this.state.searchResults[index].volumeInfo.authors,
+                description: this.state.searchResults[index].volumeInfo.description,
+                image: this.state.searchResults[index].volumeInfo.imageLinks.smallThumbnail,
+                link: this.state.searchResults[index].volumeInfo.infoLink,
+                title: this.state.searchResults[index].volumeInfo.title
+        }
+        
+        API.getBook(bookData.title)
+        .then(res =>
+        {
+            //Check if book is already in the database by title.
+            if(res.data.length)
+            {
+                saveStatus[index] = "Already in Database";
+                this.setState({ saveStatus: saveStatus });
+            }
+            else
+            {
+                //Not in the database. Save it.
+                API.saveBook(bookData)
+                .then(res =>
+                {
+                    saveStatus[index] = "Saved";
+                    this.setState({ saveStatus: saveStatus });
+                })
+                .catch(err => console.log(err));
+            }
+        })
+        .catch(err => console.log(err));
+    }
+
+    //Go to the information website.
+    clickView = (index) =>
+    {
+        window.location.href = this.state.searchResults[index].volumeInfo.infoLink;
+    }
 
     //Get the book search text.
     inputChange = (event) =>
@@ -28,7 +76,33 @@ class Search extends React.Component
         API.searchBooks(searchString)
         .then(res =>
         {
-            console.log(res);
+            //Only save data if it exists.
+            if(res.data.items)
+            {
+                let saveStatus = [];
+
+                //Clear the save status array.
+                for(let i = 0; i < res.data.items.length; i++)
+                {
+                    saveStatus.push(" ");
+                }
+
+                this.setState(
+                {
+                    searchResults: res.data.items, 
+                    saveStatus: saveStatus
+                });
+            }
+            else
+            {
+                this.setState(
+                { 
+                    searchResults: [],
+                    saveStatus: []
+                });
+            }
+
+            console.log(res.data.items);
         })
         .catch(err => console.log(err));
     }
@@ -43,7 +117,26 @@ class Search extends React.Component
                     searchValue={this.state.searchText}
                 />
                 <SearchItems>
-
+                    <h4>Search Results</h4>
+                    {this.state.searchResults.length ? 
+                    (
+                        this.state.searchResults.map((book, i) => (
+                            <SearchItem
+                                key={i}
+                                id={i}
+                                save={this.clickSave}
+                                view={this.clickView}
+                                status={this.state.saveStatus[i]} 
+                                authors={book.volumeInfo.authors ? book.volumeInfo.authors : "N/A"}
+                                description={book.volumeInfo.description ? book.volumeInfo.description : "N/A"}
+                                image={book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : "N/A"}
+                                link={book.volumeInfo.infoLink ? book.volumeInfo.infoLink : "#"}
+                                title={book.volumeInfo.title ? book.volumeInfo.title : "N/A"}
+                            />
+                        ))
+                    ) : (
+                        <h3>No Results to Display</h3>
+                    )}
                 </SearchItems>
             </div>
         );
