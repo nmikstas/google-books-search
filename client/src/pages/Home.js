@@ -1,11 +1,10 @@
 import React from "react";
+import HomeDiv from "../components/Home";
 
 function Home()
 {
     return (
-        <div>
-            <h1 className="mt-5">Home</h1>
-        </div>
+        <HomeDiv />
     );
 }
 
